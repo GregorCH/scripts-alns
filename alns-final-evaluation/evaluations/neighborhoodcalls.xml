@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<Evaluation comparecolformat="%.3f" index="ProblemName" indexsplit="1" sortlevel="0" validate="all.solu">
+	<Column active="True" name="Cr" origcolname="Neighborhoods_Calls_crossover" reduction="meanOrConcat"/>
+	<Column active="True" name="Di" origcolname="Neighborhoods_Calls_dins" reduction="meanOrConcat"/>
+	<Column active="True" name="Lo" origcolname="Neighborhoods_Calls_localbranching" reduction="meanOrConcat"/>
+	<Column active="True" name="Mu" origcolname="Neighborhoods_Calls_mutation" reduction="meanOrConcat"/>
+	<Column active="True" name="Pr" origcolname="Neighborhoods_Calls_proximity" reduction="meanOrConcat"/>
+	<Column active="True" name="Re" origcolname="Neighborhoods_Calls_rens" reduction="meanOrConcat"/>
+	<Column active="True" name="Ri" origcolname="Neighborhoods_Calls_rins" reduction="meanOrConcat"/>
+	<Column active="True" name="Ze" origcolname="Neighborhoods_Calls_zeroobjective" reduction="meanOrConcat"/>
+	<FilterGroup active="True" filtertype="intersection" name="all"/>
+</Evaluation>

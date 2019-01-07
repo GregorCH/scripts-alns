@@ -1,0 +1,15 @@
+require(ggplot2)
+require(reshape2)
+
+mss_summary <- summarySE(melted_sol_solutions, measurevar = "solution", groupvars = c("fixrate", "heuristic"))
+mss_summary$heuristic <- gsub("_sol", "", mss_summary$heuristic)
+pd = position_dodge(.05)
+g <- ggplot(data = mss_summary, aes(fixrate, solution, col=heuristic, shape=heuristic))   + geom_line(position=pd) + geom_point(position=pd)
+g <- g + scale_x_continuous(breaks=seq(0.1,0.9,.2))
+g <- g + scale_shape_manual(name="Neighborhood", values = 1:8)
+g <- g + scale_color_discrete(name="Neighborhood")
+g <- g + xlab("Fixing rate")
+g <- g + ylab("Sol. rate")
+ggsave("plots/plot_fixrate_solutions.pdf")
+print(g)
+

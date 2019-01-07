@@ -1,0 +1,165 @@
+<?xml version="1.0" ?>
+<Evaluation comparecolformat="%.3f" index="ProblemName Settings" indexsplit="1" sortlevel="0" validate="all.solu">
+	<Column active="True" maxval="TimeLimit" alternative="TimeLimit" comp="quot shift. by 10" minval="0.5" name="Time" origcolname="SolvingTime" reduction="meanOrConcat">
+		<Aggregation aggregation="shmean" name="shmean" shiftby="1.0"/>
+	</Column>
+	<Column active="True" alternative="0" comp="quot" name="Nodes" origcolname="Nodes" reduction="meanOrConcat">
+		<Aggregation aggregation="shmean" name="shmean" shiftby="100.0"/>
+	</Column>
+	<Column active="True" comp="quot shift. by 1000" name="PInt" origcolname="PrimalIntegral" reduction="meanOrConcat">
+		<Aggregation aggregation="mean" name="avg"/>
+	</Column>
+	<Column active="True" origcolname="Status" reduction="getBestStatus"/>
+	<Column active="True" alternative="0.0" origcolname="LP_Iterations_dualLP" reduction="meanOrConcat"/>
+	<Column active="False" name="ALNS" reduction="meanOrConcat" transformfunc="divide">
+		<Column active="True" alternative="0" origcolname="PrimalHeuristics_Best_alns" reduction="meanOrConcat"/>
+		<Column active="True" minval="1.0" origcolname="PrimalHeuristics_Calls_alns" reduction="meanOrConcat"/>
+		<Aggregation aggregation="mean" name="avg"/>
+	</Column>
+	<FilterGroup active="True" filtertype="intersection" name="All">
+		<Filter active="True" anytestrun="all" expression1="Status" expression2="fail_abort" operator="neq"/>
+    <Filter active="True" anytestrun="all" expression1="_fail_" expression2="0" operator="eq" />
+    <Filter operator="keep" active="True" datakey="ProblemName">
+      <Value name="MMM" />
+      <Value name="COR@L" />
+    </Filter>
+
+	</FilterGroup>
+	<FilterGroup active="True" filtertype="intersection" name="alloptimal">
+		<Filter active="True" anytestrun="all" expression1="_solved_" expression2="1" operator="eq"/>
+    <Filter active="True" anytestrun="all" expression1="_fail_" expression2="0" operator="eq" />
+    <Filter operator="keep" active="True" datakey="ProblemName">
+      <Value name="MMM" />
+      <Value name="COR@L" />
+    </Filter>
+
+	</FilterGroup>
+	<FilterGroup active="True" filtertype="intersection" name="[10,7200]">
+		<Filter active="True" anytestrun="one" expression1="_solved_" expression2="1" operator="eq"/>
+		<Filter active="True" anytestrun="all" expression1="Time" expression2="10" operator="ge"/>
+    <Filter active="True" anytestrun="all" expression1="_fail_" expression2="0" operator="eq" />
+    <Filter operator="keep" active="True" datakey="ProblemName">
+      <Value name="MMM" />
+      <Value name="COR@L" />
+    </Filter>
+
+	</FilterGroup>
+	<FilterGroup active="True" filtertype="intersection" name="[100,7200]">
+		<Filter active="True" anytestrun="one" expression1="_solved_" expression2="1" operator="eq"/>
+		<Filter active="True" anytestrun="all" expression1="Time" expression2="100" operator="ge"/>
+    <Filter active="True" anytestrun="all" expression1="_fail_" expression2="0" operator="eq" />
+    <Filter operator="keep" active="True" datakey="ProblemName">
+      <Value name="MMM" />
+      <Value name="COR@L" />
+    </Filter>
+
+	</FilterGroup>
+	<FilterGroup active="True" filtertype="intersection" name="[1000,7200]">
+		<Filter active="True" anytestrun="one" expression1="_solved_" expression2="1" operator="eq"/>
+		<Filter active="True" anytestrun="all" expression1="Time" expression2="1000" operator="ge"/>
+    <Filter active="True" anytestrun="all" expression1="_fail_" expression2="0" operator="eq" />
+    <Filter operator="keep" active="True" datakey="ProblemName">
+      <Value name="MMM" />
+      <Value name="COR@L" />
+    </Filter>
+
+	</FilterGroup>
+	<FilterGroup active="True" filtertype="intersection" name="timeouts">
+		<Filter active="True" anytestrun="all" expression1="_time_" expression2="1" operator="eq"/>
+		<Filter active="False" anytestrun="one" expression1="_solved_" expression2="0" operator="eq"/>
+    <Filter active="True" anytestrun="all" expression1="_fail_" expression2="0" operator="eq" />
+    <Filter operator="keep" active="True" datakey="ProblemName">
+      <Value name="MMM" />
+      <Value name="COR@L" />
+    </Filter>
+
+	</FilterGroup>
+	<FilterGroup active="True" filtertype="intersection" name="easyinstances">
+		<Filter active="True" anytestrun="all" expression1="Time" expression2="100" operator="le"/>
+    <Filter active="True" anytestrun="all" expression1="_fail_" expression2="0" operator="eq" />
+    <Filter operator="keep" active="True" datakey="ProblemName">
+      <Value name="MMM" />
+      <Value name="COR@L" />
+    </Filter>
+
+	</FilterGroup>
+	<FilterGroup active="True" filtertype="intersection" name="mmm">
+		<Filter active="True" anytestrun="all" datakey="ProblemName" operator="keep">
+			<Value active="True" name="MMM"/>
+		</Filter>
+    <Filter active="True" anytestrun="all" expression1="_fail_" expression2="0" operator="eq" />
+    <Filter operator="keep" active="True" datakey="ProblemName">
+      <Value name="MMM" />
+      <Value name="COR@L" />
+    </Filter>
+
+	</FilterGroup>
+	<FilterGroup active="True" filtertype="intersection" name="coral">
+		<Filter active="True" anytestrun="all" datakey="ProblemName" operator="keep">
+			<Value active="True" name="COR@L"/>
+		</Filter>
+	</FilterGroup>
+	<FilterGroup active="True" filtertype="intersection" name="Diff">
+		<Filter active="True" anytestrun="one" datakey="LP_Iterations_dualLP" operator="diff"/>
+		<Filter active="True" anytestrun="one" expression1="_solved_" expression2="1" operator="eq"/>
+    <Filter active="True" anytestrun="all" expression1="_fail_" expression2="0" operator="eq" />
+    <Filter operator="keep" active="True" datakey="ProblemName">
+      <Value name="MMM" />
+      <Value name="COR@L" />
+    </Filter>
+
+	</FilterGroup>
+	<FilterGroup active="True" filtertype="intersection" name="Equal">
+		<Filter active="True" anytestrun="all" datakey="LP_Iterations_dualLP" operator="equal"/>
+		<Filter active="True" anytestrun="one" expression1="_solved_" expression2="1" operator="eq"/>
+    <Filter active="True" anytestrun="all" expression1="_fail_" expression2="0" operator="eq" />
+    <Filter operator="keep" active="True" datakey="ProblemName">
+      <Value name="MMM" />
+      <Value name="COR@L" />
+    </Filter>
+
+	</FilterGroup>
+	<FilterGroup active="True" filtertype="intersection" name="MIPLIB2010">
+		<Filter active="True" anytestrun="all" datakey="ProblemName" operator="keep">
+			<Value active="True" name="MIPLIB2010"/>
+		</Filter>
+    <Filter active="True" anytestrun="all" expression1="_fail_" expression2="0" operator="eq" />
+    <Filter operator="keep" active="True" datakey="ProblemName">
+      <Value name="MMM" />
+      <Value name="COR@L" />
+    </Filter>
+
+	</FilterGroup>
+	<FilterGroup active="True" filtertype="intersection" name="manycalls">
+		<Filter active="True" anytestrun="one" expression1="PrimalHeuristics_Calls_alns" expression2="16" operator="ge"/>
+		<Filter active="True" anytestrun="one" expression1="_solved_" expression2="1" operator="eq"/>
+		<Filter active="True" anytestrun="one" datakey="LP_Iterations_dualLP" operator="diff"/>
+    <Filter active="True" anytestrun="all" expression1="_fail_" expression2="0" operator="eq" />
+    <Filter operator="keep" active="True" datakey="ProblemName">
+      <Value name="MMM" />
+      <Value name="COR@L" />
+    </Filter>
+
+	</FilterGroup>
+	<FilterGroup active="True" filtertype="intersection" name="fewcalls">
+		<Filter active="True" anytestrun="all" expression1="PrimalHeuristics_Calls_alns" expression2="15" operator="le"/>
+		<Filter active="True" anytestrun="one" expression1="_solved_" expression2="1" operator="eq"/>
+		<Filter active="True" anytestrun="one" datakey="LP_Iterations_dualLP" operator="diff"/>
+    <Filter active="True" anytestrun="all" expression1="_fail_" expression2="0" operator="eq" />
+    <Filter operator="keep" active="True" datakey="ProblemName">
+      <Value name="MMM" />
+      <Value name="COR@L" />
+    </Filter>
+
+	</FilterGroup>
+  <FilterGroup active="True" filtertype="intersection" name="ALNS">
+		<Filter active="True" anytestrun="one" expression1="PrimalHeuristics_Calls_alns" expression2="1" operator="ge"/>
+    <Filter active="False" anytestrun="one" expression1="_solved_" expression2="1" operator="eq"/>
+    <Filter active="True" anytestrun="all" expression1="_fail_" expression2="0" operator="eq" />
+    <Filter operator="keep" active="True" datakey="ProblemName">
+      <Value name="MMM" />
+      <Value name="COR@L" />
+    </Filter>
+
+	</FilterGroup>
+</Evaluation>

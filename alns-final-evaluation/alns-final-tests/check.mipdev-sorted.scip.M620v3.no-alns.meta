@@ -1,0 +1,11 @@
+@Permutation 0
+@Seed 0
+@Settings no-alns
+@TstName mipdev-sorted
+@BinName alns/bin/scip
+@NodeLimit 2100000000
+@MemLimit 35000
+@Threads 1
+@FeasTol default
+@Queue M620v3
+@Exclusive --exclusive
